@@ -11,14 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ReqApplication  extends SpringBootServletInitializer {
 
+	
+	@Autowired
+	CustomerserviceImpl customerservice;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ReqApplication.class, args);
 	}
 
 	@CrossOrigin(origins = "http://localhost:8080")
-	@GetMapping("/add")
-	public String index(){
-		return "welcome";
+	
+	@PostMapping("/add")
+	public String index(customerModel customerModel){
+		customerservice.saveCustomer(customerModel);
+		return "user added successfully";
 	}
 
 }
